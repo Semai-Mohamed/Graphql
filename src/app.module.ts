@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { AppService, AuthorsService, PostsService } from './app.service';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
-import { UserResolver } from './Graphql/resolver';
+import { AuthorsResolver } from './Graphql/resolver';
 import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
 
 @Module({
@@ -20,6 +20,6 @@ import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin
     }),
   ],
   controllers: [AppController],
-  providers: [AppService,UserResolver],
+  providers: [AppService,AuthorsResolver,AuthorsService,PostsService],
 })
 export class AppModule {}
