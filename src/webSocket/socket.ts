@@ -37,3 +37,54 @@ export class ChatGateway {
     console.log(`${client.id} joined room ${room}`);
   }
 }
+
+/**
+ Exception filters
+The only difference between the HTTP exception filter layer and the corresponding web sockets layer is that instead of throwing HttpException, you should use WsException.
+
+
+
+throw new WsException('Invalid credentials.');
+ */
+
+/**
+ 
+@UsePipes(new ValidationPipe({ exceptionFactory: (errors) => new WsException(errors) }))
+@SubscribeMessage('events')
+handleEvent(client: Client, data: unknown): WsResponse<unknown> {
+  const event = 'events';
+  return { event, data };
+}
+
+ */
+
+/**
+ Binding guards#
+The following example uses a method-scoped guard. Just as with HTTP based applications, you can also use gateway-scoped guards (i.e., prefix the gateway class with a @UseGuards() decorator).
+
+
+JS
+
+@UseGuards(AuthGuard)
+@SubscribeMessage('events')
+handleEvent(client: Client, data: unknown): WsResponse<unknown> {
+  const event = 'events';
+  return { event, data };
+}
+ */
+
+
+/**
+ Interceptors
+There is no difference between regular interceptors and web sockets interceptors. The following example uses a manually instantiated method-scoped interceptor. Just as with HTTP based applications, you can also use gateway-scoped interceptors (i.e., prefix the gateway class with a @UseInterceptors() decorator).
+
+
+JS
+
+@UseInterceptors(new TransformInterceptor())
+@SubscribeMessage('events')
+handleEvent(client: Client, data: unknown): WsResponse<unknown> {
+  const event = 'events';
+  return { event, data };
+}
+ */
