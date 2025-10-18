@@ -6,6 +6,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
 import { AuthorsResolver } from './Graphql/resolver';
 import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
+import { ChatGateway } from './webSocket/socket';
 
 @Module({
   imports: [
@@ -20,6 +21,6 @@ import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin
     }),
   ],
   controllers: [AppController],
-  providers: [AppService,AuthorsResolver,AuthorsService,PostsService],
+  providers: [AppService,AuthorsResolver,AuthorsService,PostsService,ChatGateway],
 })
 export class AppModule {}
